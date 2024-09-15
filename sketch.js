@@ -1,5 +1,8 @@
 let fRate = 60;
 let cPoint = 0;
+let song;
+let songPlaying = true;
+let noteSet = new Set();
 
 function Note(pKey,sTime,duration) {
   this.currentY = 0;
@@ -45,7 +48,11 @@ function createNote(note){
   }
 }
 
-let note1 = new Note('f',3,1);
+let note1 = new Note('f',2.5,1);
+
+function preload(){
+  song = loadSound("이해가쏙쏙되잖아리슝좍아.mp3");
+}
 
 function setup() {
   createCanvas(800, 800);
@@ -78,6 +85,10 @@ function draw() {
   text(int(frameCount/fRate),700,100);
   text(cPoint,700,200);
   
+  if(frameCount>=fRate*3 && songPlaying){
+    song.play()
+    songPlaying = false;
+  }
   //s
   if (keyIsDown(83)){
     strokeWeight(0);
